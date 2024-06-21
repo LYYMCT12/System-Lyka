@@ -1,7 +1,7 @@
-@extends('layouts.backend')
+<!-- @extends('layouts.backend')
 @section('title', trans('app.auto_token'))
 
-@section('content')
+@section('content') -->
 <div class="panel panel-primary" id="toggleScreenArea">
 
     <div class="panel-heading pt-0 pb-0">
@@ -360,5 +360,5 @@ $(document).ready(function(){
     });
 });
 </script>
-@endpush
+<!-- @endpush -->
 

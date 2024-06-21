@@ -4,7 +4,7 @@
     font-weight: 400;
     src: local('Display'), local('Display'), url('../fonts/Display.ttf') format('ttf');
     unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-} 
+}
 
 .btn-default,
 .btn-default:active,
@@ -13,7 +13,7 @@
   color: #3C8DBC;
   background:#E0F7FF;
 }
- 
+
 .carousel-indicators li,
 .popover-title,
 .popover,
@@ -41,7 +41,7 @@
 .nav-pills > li > a,
 .nav-tabs.nav-justified > li > a,
 .nav-tabs > li > a,
-.input-group-addon.input-lg, 
+.input-group-addon.input-lg,
 .input-group-addon.input-sm,
 .input-group-addon.input-xs,
 .input-group-addon,
@@ -65,7 +65,7 @@
 .form-group-sm .form-control,
 .form-control,
 .input-sm,
-pre, 
+pre,
 kbd,
 code,
 .img-circle,
@@ -73,12 +73,12 @@ code,
 .img-rounded {
   border-radius: 0px;
 }
- 
+
 #lang-select {
     width: 100% !important;
-    height: 28px; 
+    height: 28px;
     background: white url(../img/icons/locale.svg) no-repeat 0px left;
-     background-size: 20px 20px; 
+     background-size: 20px 20px;
 }
 
 .p-0{padding:0!important}
@@ -110,7 +110,7 @@ code,
     vertical-align: bottom;
 }
 table thead, table tfoot {
-    background: #e0f7ff!important; 
+    background: #e0f7ff!important;
     color:#3C8DBC;
 }
 
@@ -122,29 +122,29 @@ table tbody tr.selected {
 .dataTables_paginate .pagination>li>a, .pagination>li>span{padding:5px 10px!important; font-size:13px}
 div.dt-button-collection{
     margin:0;
-    padding:0; 
+    padding:0;
     max-width: 185px;
-    border: 1px solid rgba(0,0,0,0.4); 
+    border: 1px solid rgba(0,0,0,0.4);
     z-index: 2002;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 div.dt-button-collection > .dropdown-menu {
     position: static;
     visibility: visible;
     opacity:1;
     padding: 0;
-     -webkit-transform: scaleY(1); 
+     -webkit-transform: scaleY(1);
     -ms-transform: scaleY(1);
     -o-transform: scaleY(1);
     transform: scaleY(1);
 }
-div.dt-button-collection > .dropdown-menu>li>a:hover, 
+div.dt-button-collection > .dropdown-menu>li>a:hover,
 div.dt-button-collection > .dropdown-menu>li>a:focus {
     background: #E0F7FF;
     color: #000000;
 }
 
-  
+
 /*PANEL SYTLE*/
 .panel{border:0;}
 .panel-heading {
@@ -257,7 +257,7 @@ div.dt-button-collection > .dropdown-menu>li>a:focus {
     font-size: 28px;
 }
 .queue2.active {
-    background: #222222!important;
+    background: #5cdb94!important;
     color: white!important;
 }
 .queue2.active:after {
@@ -338,4 +338,10 @@ div.dt-button-collection > .dropdown-menu>li>a:focus {
     width: 8ch;
     overflow: hidden;
     padding:10px;
+}
+
+/* Department Table Buttons */
+.btn-group a.btn-sm {
+    margin-left: 3px !important;
+    margin-bottom: 4px !important
 }

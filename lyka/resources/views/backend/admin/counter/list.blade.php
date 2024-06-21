@@ -8,12 +8,12 @@
         <ul class="row list-inline m-0">
             <li class="col-xs-10 p-0 text-left">
                 <h3>{{ trans('app.counter_list') }}</h3>
-            </li>             
+            </li>
             <li class="col-xs-2 p-0 text-right">
                 <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#infoModal">
                   <i class="fa fa-info-circle"></i>
                 </button>
-            </li> 
+            </li>
         </ul>
     </div>
 
@@ -30,7 +30,7 @@
                         <th>{{ trans('app.status') }}</th>
                         <th width="80"><i class="fa fa-cogs"></i></th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
 
                     @if (!empty($counters))
@@ -45,18 +45,18 @@
                                 <td>{!! (($counter->status==1)?"<span class='label label-success'>". trans('app.active') ."</span>":"<span class='label label-dander'>". trans('app.deactive') ."</span>") !!}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ url("admin/counter/edit/$counter->id") }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ url("admin/counter/delete/$counter->id") }}" class="btn btn-danger btn-sm" onclick="return confirm('{{ trans("app.are_you_sure") }}')"><i class="fa fa-times"></i></a>
+                                        <a href="{{ url("admin/counter/edit/$counter->id") }}" class="btn btn-success btn-sm" data-toggle="tooltip"  title="Edit"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ url("admin/counter/delete/$counter->id") }}" class="btn btn-danger btn-sm" onclick="return confirm('{{ trans("app.are_you_sure") }}')" data-toggle="tooltip"  title="Delete"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
-                            </tr> 
+                            </tr>
                         @endforeach
                     @endif
                 </tbody>
             </table>
-        </div> 
-    </div> 
-</div>  
+        </div>
+    </div>
+</div>
 
 
 <!-- Modal -->
@@ -69,7 +69,7 @@
       </div>
       <div class="modal-body">
         <p><strong class="label label-warning"> Note 1 </strong> &nbsp;If you delete a Counter then, the related tokens are not calling on the Display screen. Because the token is dependent on Counter ID</p>
-        <p><strong class="label label-warning"> Note 2 </strong> &nbsp;If you want to change a Counter name you must rename the Counter instead of deleting it. 
+        <p><strong class="label label-warning"> Note 2 </strong> &nbsp;If you want to change a Counter name you must rename the Counter instead of deleting it.
         </p>
       </div>
       <div class="modal-footer">
@@ -77,7 +77,7 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 @endsection
 
- 
+

@@ -25,8 +25,13 @@
         <link href="{{ asset('public/assets/css/select2.min.css') }}"  rel='stylesheet'>
         <!-- custom style -->
         <link href="{{ asset('public/assets/css/style.css') }}" rel='stylesheet'>
+        <!-- bootstrap cdn -->
+        <!-- <link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}"> -->
         <!-- Page styles -->
         @stack('styles')
+
+        <!-- Autoken Stylesheet -->
+        <link rel="stylesheet" href="{{asset('public/assets/css/auto_token_styles.css')}}">
 
         <!-- Jquery  -->
         <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
@@ -320,7 +325,7 @@
                 <!-- <div class="dropdown pull-right">
                     <a href="{{ url('common/message/inbox') }}" class="btn btn-primary md-local-post-office-white"> <span class="label label-danger" id="message-notify">0</span> </a>
                 </div> -->
-                <div class="dropdown pull-right">
+                <!-- <div class="dropdown pull-right">
                     <button class="btn btn-primary md-language-white" data-toggle="dropdown"> <span class="label label-danger">{{ Session::get('locale')? Session::get('locale'):'en' }}</span></button>
                     <div class="popover cm-popover bottom">
                         <div class="arrow"></div>
@@ -359,7 +364,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 @if($user = Auth::user())
                 <div class="dropdown pull-right">
                     <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
