@@ -7,52 +7,52 @@
     <div class="panel-body">
 
         <div class="row">
-        <div class="col-sm-12 shadowed">
-            <a href="{{route('department')}}">
+            <div class="col-sm-12 shadowed">
+                <a href="{{route('department')}}">
+                    <div class="btn btn-info col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                        <div class="p-1">
+                            <i class="fa fa-cubes fa-2x"></i>
+                            <h5>{{ (isset($infobox->department)?$infobox->department:0) }} {{ trans('app.department') }}</h5>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{route('counter')}}">
+                    <div class="btn btn-warning col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                        <div class="p-1">
+                            <i class="fa fa-star-o fa-2x"></i>
+                            <h5>{{ (isset($infobox->counter)?$infobox->counter:0) }} {{ trans('app.counter') }}</h5>
+                        </div>
+                    </div>
+                </a>
+            <a href="{{route('users')}}">
+                <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                        <div class="p-1">
+                            <i class="fa fa-users fa-2x"></i>
+                            <h5>{{ (isset($infobox->user)?$infobox->user:0) }} {{ trans('app.users') }}</h5>
+                        </div>
+                    </div>
+            </a>
+                <a href="{{route('token_report')}}">
+                    <div class="btn btn-success col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                        <div class="p-1">
+                            <i class="fa fa-ticket fa-2x"></i>
+                            <h5>{{ (isset($infobox->token->total)?$infobox->token->total:0) }} {{ trans('app.token') }}</h5>
+                        </div>
+                    </div>
+                </a>
                 <div class="btn btn-info col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
                     <div class="p-1">
-                        <i class="fa fa-cubes fa-2x"></i>
-                        <h5>{{ (isset($infobox->department)?$infobox->department:0) }} {{ trans('app.department') }}</h5>
+                        <i class="fa fa-ticket fa-2x"></i>
+                        <h5>{{ (isset($infobox->token->pending)?$infobox->token->pending:0) }} {{ trans('app.pending') }} {{ trans('app.token') }}</h5>
                     </div>
                 </div>
-            </a>
-            <a href="{{route('counter')}}">
-                <div class="btn btn-warning col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
-                    <div class="p-1">
-                        <i class="fa fa-star-o fa-2x"></i>
-                        <h5>{{ (isset($infobox->counter)?$infobox->counter:0) }} {{ trans('app.counter') }}</h5>
-                    </div>
-                </div>
-            </a>
-           <a href="{{route('users')}}">
-            <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
-                    <div class="p-1">
-                        <i class="fa fa-users fa-2x"></i>
-                        <h5>{{ (isset($infobox->user)?$infobox->user:0) }} {{ trans('app.users') }}</h5>
-                    </div>
-                </div>
-           </a>
-            <a href="{{route('token_report')}}">
-                <div class="btn btn-success col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
                     <div class="p-1">
                         <i class="fa fa-ticket fa-2x"></i>
-                        <h5>{{ (isset($infobox->token->total)?$infobox->token->total:0) }} {{ trans('app.token') }}</h5>
+                        <h5>{{ (isset($infobox->token->complete)?$infobox->token->complete:0) }} {{ trans('app.complete') }} {{ trans('app.token') }}</h5>
                     </div>
                 </div>
-            </a>
-            <div class="btn btn-info col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
-                <div class="p-1">
-                    <i class="fa fa-ticket fa-2x"></i>
-                    <h5>{{ (isset($infobox->token->pending)?$infobox->token->pending:0) }} {{ trans('app.pending') }} {{ trans('app.token') }}</h5>
-                </div>
             </div>
-            <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
-                <div class="p-1">
-                    <i class="fa fa-ticket fa-2x"></i>
-                    <h5>{{ (isset($infobox->token->complete)?$infobox->token->complete:0) }} {{ trans('app.complete') }} {{ trans('app.token') }}</h5>
-                </div>
-            </div>
-        </div>
         </div>
 
         <div class="row">
@@ -70,17 +70,17 @@
                 </div>
             </div>
 
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
                 <div class="panel panel-primary shadowed">
                     <div class="panel-heading">{{ trans('app.today_user_performance') }}</div>
                     <div class="panel-body">
                     @if (!empty($performance))
                     @foreach($performance as $user)
-                    <?php
+                    @php
                     $pending = number_format(((($user->pending?$user->pending:0)/($user->total?$user->total:1))*100),1);
                     $complete = number_format(((($user->complete?$user->complete:0)/($user->total?$user->total:1))*100),1);
                     $stop = number_format(((($user->stop?$user->stop:0)/($user->total?$user->total:1))*100),1);
-                    ?>
+                    @endphp
                         <div class="row">
                             <label class="col-sm-3 col-xs-12">{{ $user->username }}</label>
                             <div class="col-sm-9 col-xs-12">
@@ -101,14 +101,14 @@
                     @endif
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
                 <div class="panel panel-primary shadowed mb-3">
                     <div class="panel-heading">{{ trans('app.from_the_begining') }}</div>
                     <div class="panel-body"><canvas id="pieChart" style="height:200px"></canvas></div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
