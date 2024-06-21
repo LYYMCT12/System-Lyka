@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-12 shadowed">
                 <a href="{{route('department')}}">
-                    <div class="btn btn-info col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                    <div class="btn btn-danger col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 department-card">
                         <div class="p-1">
                             <i class="fa fa-cubes fa-2x"></i>
                             <h5>{{ (isset($infobox->department)?$infobox->department:0) }} {{ trans('app.department') }}</h5>

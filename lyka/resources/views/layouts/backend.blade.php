@@ -27,6 +27,9 @@
         <link href="{{ asset('public/assets/css/style.css') }}" rel='stylesheet'>
         <!-- bootstrap cdn -->
         <!-- <link rel="stylesheet" href="{{asset('public/assets/css/bootstrap.min.css')}}"> -->
+        <!-- Admin Dashboard Styles -->
+         <link rel="stylesheet" href="{{asset('public/assets/css/admin_dashboard.css')}}">
+
         <!-- Page styles -->
         @stack('styles')
 
