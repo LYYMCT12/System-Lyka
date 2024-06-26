@@ -154,18 +154,18 @@
                 var content = "<style type=\"text/css\">@media print {"+
                     "html, body {display:block;margin:0!important; padding:0 !important;overflow:hidden;display:table;}"+
                     ".receipt-token {width:100vw;height:100vw;text-align:center}"+
-                    ".receipt-token h4{margin:0;padding:0;font-size:7vw;line-height:7vw;text-align:center}"+
-                    ".receipt-token h1{margin:0;padding:0;font-size:15vw;line-height:20vw;text-align:center}"+
-                    ".receipt-token ul{margin:0;padding:0;font-size:7vw;line-height:8vw;text-align:center;list-style:none;}"+
+                    ".receipt-token h4{margin:0;padding:1;font-size:7vw;line-height:7vw;text-align:left}"+
+                    ".receipt-token h1{margin:0;padding:1;font-size:15vw;line-height:20vw;text-align:left}"+
+                    ".receipt-token ul{margin:0;padding:1;font-size:7vw;line-height:8vw;text-align:left;list-style:none;}"+
                     "}</style>";
 
                 content += "<div class=\"receipt-token\">";
                 content += "<h4>{{ \Session::get('app.title') }}</h4>";
                 content += "<h1>"+data.token.token_no+"</h1>";
                 content +="<ul class=\"list-unstyled\">";
-                content += "<li><strong>{{ trans('app.department') }} </strong>"+data.token.department+"</li>";
-                content += "<li><strong>{{ trans('app.counter') }} </strong>"+data.token.counter+"</li>";
-                content += "<li><strong>{{ trans('app.officer') }} </strong>"+data.token.firstname+' '+data.token.lastname+"</li>";
+                content += "<li class="text-center"><strong>{{ trans('app.department') }} : </strong>"+data.token.department+"</li>";
+                content += "<li class="text-center"><strong>{{ trans('app.counter') }}: </strong>"+data.token.counter+"</li>";
+                content += "<li class="text-center"><strong>{{ trans('app.officer') }}: </strong>"+data.token.firstname+' '+data.token.lastname+"</li>";
                 if (data.token.note)
                 {
                     content += "<li><strong>{{ trans('app.note') }} </strong>"+data.token.note+"</li>";

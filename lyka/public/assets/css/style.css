@@ -10,7 +10,7 @@
 .btn-default:active,
 .btn-default:focus,
 .btn-default:hover {
-  color: #3C8DBC;
+  color: #3498db;
   background:#E0F7FF;
 }
 
@@ -74,12 +74,12 @@ code,
   border-radius: 0px;
 }
 
-#lang-select {
+/* #lang-select {
     width: 100% !important;
     height: 28px;
     background: white url(../img/icons/locale.svg) no-repeat 0px left;
      background-size: 20px 20px;
-}
+} */
 
 .p-0{padding:0!important}
 .pl-0{padding-left:0!important}
@@ -148,6 +148,7 @@ div.dt-button-collection > .dropdown-menu>li>a:focus {
 /*PANEL SYTLE*/
 .panel{border:0;}
 .panel-heading {
+    font-family: Tahoma;
     border-radius:0;
     background: #ffffff !important;
     color: #3498db !important;
@@ -197,7 +198,7 @@ div.dt-button-collection > .dropdown-menu>li>a:focus {
     height: 100%;
 }
 .queue {
-    font-family: 'Display';
+    font-family: Tahoma;
     position: relative;
     height: 120px;
     z-index: 1;

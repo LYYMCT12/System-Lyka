@@ -3,7 +3,8 @@
 
 @section('content')
 <div class="panel panel-primary">
-    <div class="panel-heading"><h3 class="text-left">{{ trans('app.dashboard') }}</h3></div>
+    <div class="panel-heading"><h3 class="text-left dashboard-heading">{{ trans('app.dashboard') }}</h3></div>
+
     <div class="panel-body">
 
         <div class="row">
@@ -12,20 +13,20 @@
                     <div class="btn btn-danger col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 department-card">
                         <div class="p-1">
                             <i class="fa fa-cubes fa-2x"></i>
-                            <h5>{{ (isset($infobox->department)?$infobox->department:0) }} {{ trans('app.department') }}</h5>
+                            <h5>{{ (isset($infobox->department)?$infobox->department:0) }} {{ trans('app.department') }}S</h5>
                         </div>
                     </div>
                 </a>
                 <a href="{{route('counter')}}">
-                    <div class="btn btn-warning col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                    <div class="btn btn-warning col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 counter-card">
                         <div class="p-1">
-                            <i class="fa fa-star-o fa-2x"></i>
-                            <h5>{{ (isset($infobox->counter)?$infobox->counter:0) }} {{ trans('app.counter') }}</h5>
+                            <i class="fa fa-plus-square-o fa-2x"></i>
+                            <h5>{{ (isset($infobox->counter)?$infobox->counter:0) }} {{ trans('app.counter') }}S</h5>
                         </div>
                     </div>
                 </a>
             <a href="{{route('users')}}">
-                <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 user-card">
                         <div class="p-1">
                             <i class="fa fa-users fa-2x"></i>
                             <h5>{{ (isset($infobox->user)?$infobox->user:0) }} {{ trans('app.users') }}</h5>
@@ -33,24 +34,85 @@
                     </div>
             </a>
                 <a href="{{route('token_report')}}">
-                    <div class="btn btn-success col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                    <div class="btn btn-success col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 total-token-card">
                         <div class="p-1">
                             <i class="fa fa-ticket fa-2x"></i>
                             <h5>{{ (isset($infobox->token->total)?$infobox->token->total:0) }} {{ trans('app.token') }}</h5>
                         </div>
                     </div>
                 </a>
-                <div class="btn btn-info col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                <div class="btn btn-warning col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 pending-token-card">
                     <div class="p-1">
-                        <i class="fa fa-ticket fa-2x"></i>
+                        <i class="fa fa-clock-o fa-2x"></i>
                         <h5>{{ (isset($infobox->token->pending)?$infobox->token->pending:0) }} {{ trans('app.pending') }} {{ trans('app.token') }}</h5>
                     </div>
                 </div>
-                <div class="btn btn-primary col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1">
+                <div class="btn btn-success col-lg-2 col-md-4 col-sm-6 col-xs-12 mb-1 complete-token-card">
                     <div class="p-1">
-                        <i class="fa fa-ticket fa-2x"></i>
+                        <i class="fa  fa-check-circle-o fa-2x"></i>
                         <h5>{{ (isset($infobox->token->complete)?$infobox->token->complete:0) }} {{ trans('app.complete') }} {{ trans('app.token') }}</h5>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row card-rows mt-1">
+            <div class="col-md-6">
+                <div class="card department-card p-1">
+                    <h2 class="card-header text-center">Department</h2>
+                    @php
+                    $departments = App\Models\Department::all();
+                    @endphp
+
+                    @foreach($departments as $row)
+                    <h4 class="department-list">* {{$row->name}}</h4>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card counter-card p-1">
+                    <h2 class="card-header text-center">Counter</h2>
+                    @php
+                    $counters = App\Models\Counter::all();
+                    @endphp
+                    <!-- <table class="counter-table">
+                        <tr class="counter-tr">
+                            <th class="counter-th mr-1"></th>
+                            <th class="counter-th mr-1"></th>
+                            <th class="counter-th"></th>
+                        </tr>
+
+                        @foreach($counters as $row)
+                        <tr class="counter-tr">
+                            <td class="counter-td mr-1">{{$row->name}}</td>
+                            <td class="counter-td mr-1>{{$row->description}}</td>
+                            @if($row->status === 1)
+                            <td class="counter-td">
+                                <button class="btn btn-success">Active</button>
+                            </td>
+                            @elseif($row->status === 2)
+                            <td class="counter-td">
+                                <button class="btn btn-danger">Inactive</button>
+                            </td>
+                            @else
+                            <td class="counter-td">
+                                <button class="btn btn-dark">Unknown</button>
+                            </td>
+                            @endif
+                        </tr>
+                        @endforeach
+
+                    </table> -->
+
+                    @foreach($counters as $row)
+                        <div class="counters-div">
+                            <h4>{{$row->name}}  &nbsp- &nbsp {{$row->description}}  &nbsp- &nbsp @if($row->status === 1)Active @else Inactive @endif</h4>
+                             <!-- <li>{{$row->name}}</li>
+                             <li>{{$row->description}}</li>
+                             <li>{{$row->status}}</li> -->
+                        </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -111,6 +173,7 @@
             </div> -->
         </div>
     </div>
+
 </div>
 @endsection
 

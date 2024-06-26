@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Codekernel - Queue Management System'),
+    'name' => env('APP_NAME', 'PCLU Queue Management'),
 
     /*
     |--------------------------------------------------------------------------
