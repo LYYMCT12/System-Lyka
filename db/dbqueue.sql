@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2021 at 05:04 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Jun 28, 2024 at 03:09 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,7 +34,7 @@ CREATE TABLE `counter` (
   `description` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -41,22 +42,11 @@ CREATE TABLE `counter` (
 --
 
 INSERT INTO `counter` (`id`, `name`, `description`, `created_at`, `updated_at`, `status`) VALUES
-(1, '1', NULL, '2020-04-15', '2020-07-11', 1),
-(2, '2', NULL, '2020-04-15', '2018-07-27', 1),
-(3, '3', NULL, '2020-04-15', '2018-07-27', 1),
-(4, '4', NULL, '2020-04-15', '2018-07-27', 1),
-(5, '5', NULL, '2020-04-15', '2018-07-27', 1),
-(6, '6', NULL, '2020-04-15', '2018-07-27', 1),
-(7, '7', NULL, '2020-04-15', '2018-07-27', 1),
-(8, '8', NULL, '2020-04-15', '2018-07-27', 1),
-(9, '9', NULL, '2020-04-15', '2018-07-27', 1),
-(10, '10', NULL, '2020-04-15', '2018-07-27', 1),
-(11, '11', NULL, '2020-04-15', '2018-07-27', 1),
-(12, '12', NULL, '2020-04-15', '2018-07-27', 1),
-(13, '13', NULL, '2020-04-15', '2018-07-27', 1),
-(14, '14', NULL, '2020-04-15', '2018-07-27', 1),
-(15, '15', NULL, '2020-04-15', '2018-07-27', 1),
-(16, '16', NULL, '2020-04-15', '2018-07-27', 1);
+(22, '1', 'pay', '2024-05-24', NULL, 1),
+(23, '2', 'permit', '2024-05-24', NULL, 1),
+(24, '3', 'card', '2024-05-24', NULL, 1),
+(25, '4', 'Enrollment', '2024-05-24', NULL, 1),
+(26, '5', 'completion', '2024-05-24', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -71,7 +61,7 @@ CREATE TABLE `department` (
   `key` varchar(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -79,13 +69,11 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `name`, `description`, `key`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'Department 1', 'Apple department', 'a', '2016-10-31 10:34:19', '2020-07-18 17:08:00', 1),
-(2, 'Department 2', 'Banana Department', 'b', '2016-11-09 07:18:01', '2020-07-18 17:08:17', 1),
-(3, 'Department 3', 'Coconut Department', 'c', '2016-11-10 08:02:44', '2020-07-18 17:08:32', 1),
-(4, 'Department 4', 'Orange Department', 'd', '2016-11-10 08:02:44', '2020-07-18 17:08:45', 1),
-(5, 'Department 5', NULL, 'e', '2020-05-15 12:36:12', '2020-07-18 17:08:58', 1),
-(6, 'Department 6', NULL, 'f', '2020-05-15 12:36:25', '2020-07-18 17:09:11', 1),
-(7, 'Department 7', NULL, 'q', '2020-05-15 12:36:39', '2020-07-18 19:14:13', 1);
+(13, 'Cashier', 'pay', '1', '2024-05-24 07:58:49', '2024-05-24 08:41:34', 1),
+(14, 'Permit', 'permit', '2', '2024-05-24 08:00:29', NULL, 1),
+(15, 'Card', 'card', '3', '2024-05-24 08:33:45', NULL, 1),
+(16, 'Enrollment Form', 'Enrollment', '4', '2024-05-24 08:42:41', NULL, 1),
+(17, 'Completion Form', 'completion', '5', '2024-05-24 08:56:28', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +83,7 @@ INSERT INTO `department` (`id`, `name`, `description`, `key`, `created_at`, `upd
 
 CREATE TABLE `display` (
   `id` int(11) NOT NULL,
-  `message` text DEFAULT NULL,
+  `message` text,
   `direction` varchar(10) DEFAULT 'left',
   `color` varchar(10) DEFAULT '#ffffff',
   `background_color` varchar(10) NOT NULL DEFAULT '#cdcdcd',
@@ -103,13 +91,13 @@ CREATE TABLE `display` (
   `time_format` varchar(20) DEFAULT 'h:i:s A',
   `date_format` varchar(50) DEFAULT 'd M, Y',
   `updated_at` datetime DEFAULT NULL,
-  `display` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1-single, 2/3-counter,4-department,5-hospital',
-  `keyboard_mode` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0-inactive,1-active',
-  `sms_alert` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0-inactive, 1-active ',
-  `show_note` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-inactive, 1-active ',
-  `show_officer` tinyint(1) NOT NULL DEFAULT 1,
-  `show_department` tinyint(1) NOT NULL DEFAULT 1,
-  `alert_position` int(2) NOT NULL DEFAULT 3,
+  `display` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1-single, 2/3-counter,4-department,5-hospital',
+  `keyboard_mode` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0-inactive,1-active',
+  `sms_alert` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0-inactive, 1-active ',
+  `show_note` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-inactive, 1-active ',
+  `show_officer` tinyint(1) NOT NULL DEFAULT '1',
+  `show_department` tinyint(1) NOT NULL DEFAULT '1',
+  `alert_position` int(2) NOT NULL DEFAULT '3',
   `language` varchar(20) DEFAULT 'English'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -118,7 +106,7 @@ CREATE TABLE `display` (
 --
 
 INSERT INTO `display` (`id`, `message`, `direction`, `color`, `background_color`, `border_color`, `time_format`, `date_format`, `updated_at`, `display`, `keyboard_mode`, `sms_alert`, `show_note`, `show_officer`, `show_department`, `alert_position`, `language`) VALUES
-(1, 'Token - Queue Management System', 'left', '#ff0404', '#000000', '#3c8dbc', 'H:i:s', 'd M, Y', '2020-07-18 13:21:04', 2, 1, 1, 0, 1, 1, 2, 'English');
+(1, 'Token - Queuing System for PCLU', 'left', '#000000', '#53bcfd', '#3c8dbc', 'h:i:s A', 'F j, Y', '2024-06-08 11:12:04', 2, 1, 0, 0, 1, 1, 2, 'English');
 
 -- --------------------------------------------------------
 
@@ -131,9 +119,9 @@ CREATE TABLE `display_custom` (
   `name` varchar(128) DEFAULT NULL,
   `description` varchar(512) DEFAULT NULL,
   `counters` varchar(64) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT 1 COMMENT '1-active, 2-inactive',
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `status` tinyint(1) DEFAULT '1' COMMENT '1-active, 2-inactive',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -145,43 +133,6 @@ INSERT INTO `display_custom` (`id`, `name`, `description`, `counters`, `status`,
 (2, 'Floor 2', 'TEST 2', '6,7,8,9,10', 0, '2020-10-01 03:35:28', '2020-10-01 09:17:20'),
 (3, 'Floor 3', 'TEST 3', '8,9,10,11,12,13', 1, '2020-10-01 03:35:51', '2020-10-01 08:48:36'),
 (4, 'Floor 4', 'TESTS Floor', '4,5,6,7', 1, '2020-10-01 10:11:00', '2020-10-01 06:58:27');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `message`
---
-
-CREATE TABLE `message` (
-  `id` int(11) NOT NULL,
-  `sender_id` int(11) NOT NULL,
-  `receiver_id` int(11) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `message` text NOT NULL,
-  `attachment` varchar(128) DEFAULT NULL,
-  `datetime` datetime NOT NULL,
-  `sender_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unseen, 1=seen, 2=delete',
-  `receiver_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unseen, 1=seen, 2=delete'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `subject`, `message`, `attachment`, `datetime`, `sender_status`, `receiver_status`) VALUES
-(1, 1, 5, 'Tedsf', 'gffg', NULL, '2019-07-29 05:54:00', 0, 1),
-(2, 1, 2, 'adf', 'ghdf', NULL, '2018-07-29 05:54:00', 0, 0),
-(3, 1, 3, 'hg', 'efff', NULL, '2018-07-29 05:54:00', 1, 1),
-(4, 1, 4, '3fsa', 'dasf', NULL, '2018-07-29 05:54:00', 0, 1),
-(5, 5, 1, '33', 'ewrf', NULL, '2018-07-29 05:54:00', 0, 1),
-(6, 2, 1, 'dc', 'afsc', NULL, '2018-07-29 05:54:00', 0, 1),
-(7, 3, 1, 'asdf', 'xcvs', NULL, '2018-07-29 05:54:00', 0, 1),
-(8, 4, 1, 'sx', 'exf', NULL, '2018-07-29 05:54:00', 0, 1),
-(9, 1, 6, 'AAA1', 'TAFD', NULL, '2020-07-09 22:25:00', 0, 0),
-(10, 2, 7, 'AAA1', 'TSFD', NULL, '2020-07-09 10:32:46', 0, 0),
-(11, 1, 5, 'dd', 'TEST', 'public/assets/attachments/69865.jpg', '2020-07-11 10:38:44', 0, 1),
-(12, 1, 7, 'ef', 'Test', 'public/assets/attachments/43195.jpg', '2020-07-13 00:11:47', 0, 0),
-(13, 1, 8, 'Test Subject', 'cy: No \'Access-Control-Allow-Origin\' head', 'public/assets/attachments/33884.jpg', '2020-07-13 15:23:44', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -209,81 +160,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `title`, `description`, `logo`, `favicon`, `email`, `phone`, `address`, `copyright_text`, `direction`, `language`, `timezone`) VALUES
-(1, 'Queue Management System', 'Queue', 'public/assets/img/icons/logo.jpg', 'public/assets/img/icons/favicon.jpg', 'admin@example.com', '+325 252 222', 'Demo street, NY-10000', 'copyright@2021', NULL, NULL, 'Asia/Dhaka');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sms_history`
---
-
-CREATE TABLE `sms_history` (
-  `id` int(11) NOT NULL,
-  `from` varchar(20) DEFAULT NULL,
-  `to` varchar(20) DEFAULT NULL,
-  `message` varchar(512) DEFAULT NULL,
-  `response` varchar(512) DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sms_history`
---
-
-INSERT INTO `sms_history` (`id`, `from`, `to`, `message`, `response`, `created_at`) VALUES
-(3, 'Queue Management Sys', '8801821742285', 'Test', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"status\\\": \\\"4\\\",\\n        \\\"error-text\\\": \\\"Bad Credentials\\\"\\n    }]\\n}\",\"message\":\"Test\"}', '2020-04-28 16:03:09'),
-(4, 'Queue Management Sys', '8801821742285', 'Test', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"status\\\": \\\"3\\\",\\n        \\\"error-text\\\": \\\"Invalid from param\\\"\\n    }]\\n}\",\"message\":\"Test\"}', '2020-04-28 22:05:19'),
-(5, 'Queue Management Sys', '8801821742285', 'TEST B', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"8801821742285\\\",\\n        \\\"status\\\": \\\"29\\\",\\n        \\\"error-text\\\": \\\"Non White-listed Destination - rejected\\\"\\n    }]\\n}\",\"message\":\"TEST B\"}', '2020-04-28 23:25:59'),
-(6, 'Queue Management Sys', '3367019711', 'TEST B', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"3367019711\\\",\\n        \\\"status\\\": \\\"29\\\",\\n        \\\"error-text\\\": \\\"Non White-listed Destination - rejected\\\"\\n    }]\\n}\",\"message\":\"TEST B\"}', '2020-04-28 23:27:20'),
-(7, 'Queue Management Sys', '0123456789', 'Token No: A106 \\r\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\r\\n Your waiting no is 2. \\r\\n 2020-05-14 23:44:49.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A106 \\\\r\\\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\\\r\\\\n Your waiting no is 2. \\\\r\\\\n 2020-05-14 23:44:49.\"}', '2020-05-14 23:59:49'),
-(8, 'Queue Management Sys', '0123456789', 'Token No: A204 \\r\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:52:00.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A204 \\\\r\\\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:52:00.\"}', '2020-05-14 23:59:50'),
-(9, 'Queue Management Sys', '0123456789', 'Token No: A304 \\r\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:52:06.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A304 \\\\r\\\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:52:06.\"}', '2020-05-14 23:59:51'),
-(10, 'Queue Management Sys', '0123456789', 'Token No: A107 \\r\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\r\\n Your waiting no is 1. \\r\\n 2020-05-14 23:45:24.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A107 \\\\r\\\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-14 23:45:24.\"}', '2020-05-15 00:00:06'),
-(11, 'Queue Management Sys', '0123456789', 'Token No: A203 \\r\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:51:45.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A203 \\\\r\\\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:51:45.\"}', '2020-05-15 00:00:07'),
-(12, 'Queue Management Sys', '0123456789', 'Token No: A303 \\r\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:51:49.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A303 \\\\r\\\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:51:49.\"}', '2020-05-15 00:00:07'),
-(13, 'Queue Management Sys', '0123456789', 'Token No: A202 \\r\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:51:29.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A202 \\\\r\\\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:51:29.\"}', '2020-05-15 00:00:11'),
-(14, 'Queue Management Sys', '0123456789', 'Token No: A302 \\r\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:51:39.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A302 \\\\r\\\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:51:39.\"}', '2020-05-15 00:00:12'),
-(15, 'Queue Management Sys', '0123456789', 'Token No: A201 \\r\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:51:07.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A201 \\\\r\\\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:51:07.\"}', '2020-05-15 00:00:16'),
-(16, 'Queue Management Sys', '0123456789', 'Token No: A301 \\r\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\r\\n Your waiting no is 3. \\r\\n 2020-05-14 23:51:23.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A301 \\\\r\\\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-14 23:51:23.\"}', '2020-05-15 00:00:16'),
-(17, 'Queue Management Sys', '0123456789', 'Token No: A101 \\r\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\r\\n Your waiting no is 2. \\r\\n 2020-05-15 00:20:34.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A101 \\\\r\\\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\\\r\\\\n Your waiting no is 2. \\\\r\\\\n 2020-05-15 00:20:34.\"}', '2020-05-15 00:48:46'),
-(18, 'Queue Management Sys', '0123456789', 'Token No: O502 \\r\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\r\\n Your waiting no is 3. \\r\\n 2020-05-15 00:20:39.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: O502 \\\\r\\\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\\\r\\\\n Your waiting no is 3. \\\\r\\\\n 2020-05-15 00:20:39.\"}', '2020-05-15 00:48:47'),
-(19, 'Queue Management Sys', '0123456789', 'Token No: A105 \\r\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 00:54:46.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A105 \\\\r\\\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 00:54:46.\"}', '2020-05-15 01:18:43'),
-(20, 'Queue Management Sys', '0123456789', 'Token No: O504 \\r\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 00:54:52.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: O504 \\\\r\\\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 00:54:52.\"}', '2020-05-15 01:18:44'),
-(21, 'Queue Management Sys', '0123456789', 'Token No: A106 \\r\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 01:09:26.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A106 \\\\r\\\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 01:09:26.\"}', '2020-05-15 01:18:54'),
-(22, 'Queue Management Sys', '0123456789', 'Token No: O505 \\r\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 00:54:57.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: O505 \\\\r\\\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 00:54:57.\"}', '2020-05-15 01:18:55'),
-(23, 'Queue Management Sys', '0123456789', 'Token No: A104 \\r\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 00:54:14.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A104 \\\\r\\\\n Department: Apple, Counter: 1 and Officer: Wane Willian. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 00:54:14.\"}', '2020-05-15 02:20:50'),
-(24, 'Queue Management Sys', '0123456789', 'Token No: A205 \\r\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 01:06:30.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A205 \\\\r\\\\n Department: Apple, Counter: 2 and Officer: Jane Doe. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 01:06:30.\"}', '2020-05-15 02:20:51'),
-(25, 'Queue Management Sys', '0123456789', 'Token No: A304 \\r\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 00:54:35.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: A304 \\\\r\\\\n Department: Apple, Counter: 3 and Officer: Annie Smith. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 00:54:35.\"}', '2020-05-15 02:20:52'),
-(26, 'Queue Management Sys', '0123456789', 'Token No: O502 \\r\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\r\\n Your waiting no is 1. \\r\\n 2020-05-15 00:54:26.', '{\"status\":true,\"request_url\":\"https:\\/\\/rest.nexmo.com\\/sms\\/json?\",\"success\":\"{\\n    \\\"message-count\\\": \\\"1\\\",\\n    \\\"messages\\\": [{\\n        \\\"to\\\": \\\"0123456789\\\",\\n        \\\"status\\\": \\\"6\\\",\\n        \\\"error-text\\\": \\\"Unroutable message - rejected\\\"\\n    }]\\n}\",\"message\":\"Token No: O502 \\\\r\\\\n Department: Orange, Counter: 5 and Officer: Alex Smith. \\\\r\\\\n Your waiting no is 1. \\\\r\\\\n 2020-05-15 00:54:26.\"}', '2020-05-15 02:20:52'),
-(32, '01919742285', '8801821742285', 'test', '{\"status\":true,\"request_url\":\"https:\\/\\/platform.clickatell.com\\/messages\\/http\\/send?\",\"success\":\"{\\\"messages\\\":[],\\\"errorCode\\\":607,\\\"error\\\":\\\"Invalid FROM number.\\\",\\\"errorDescription\\\":\\\"User specified FROM number, but integration isn\'t two-way.\\\"}\",\"message\":\"test\"}', '2020-05-17 14:12:10'),
-(33, '8801919742285', '8801821742285', 'test', '{\"status\":true,\"request_url\":\"https:\\/\\/platform.clickatell.com\\/messages\\/http\\/send?\",\"success\":\"{\\\"messages\\\":[],\\\"errorCode\\\":607,\\\"error\\\":\\\"Invalid FROM number.\\\",\\\"errorDescription\\\":\\\"User specified FROM number, but integration isn\'t two-way.\\\"}\",\"message\":\"test\"}', '2020-05-17 14:18:48'),
-(34, '8801919742285', '8801821742285', 'TEST', '{\"status\":true,\"request_url\":\"https:\\/\\/platform.clickatell.com\\/messages\\/http\\/send?\",\"success\":\"{\\\"messages\\\":[{\\\"apiMessageId\\\":\\\"d737eadad6f9476ca91924a8cf31a661\\\",\\\"accepted\\\":true,\\\"to\\\":\\\"8801821742285\\\",\\\"errorCode\\\":null,\\\"error\\\":null,\\\"errorDescription\\\":null}]}\",\"message\":\"TEST\"}', '2020-05-17 14:24:49'),
-(35, '7082747358', '8801821742285', 'TEST', '{\"status\":true,\"request_url\":\"https:\\/\\/platform.clickatell.com\\/messages\\/http\\/send?\",\"success\":\"{\\\"messages\\\":[],\\\"errorCode\\\":607,\\\"error\\\":\\\"Invalid FROM number.\\\",\\\"errorDescription\\\":\\\"User specified FROM number, but integration isn\'t two-way.\\\"}\",\"message\":\"TEST\"}', '2020-05-17 14:30:49'),
-(36, '17082747358', '8801821742285', 'TEST', '{\"status\":true,\"request_url\":\"https:\\/\\/platform.clickatell.com\\/messages\\/http\\/send?\",\"success\":\"{\\\"messages\\\":[{\\\"apiMessageId\\\":\\\"c5d7a69898ef43348e9b3cd7ce7a5096\\\",\\\"accepted\\\":true,\\\"to\\\":\\\"8801821742285\\\",\\\"errorCode\\\":null,\\\"error\\\":null,\\\"errorDescription\\\":null}]}\",\"message\":\"TEST\"}', '2020-05-17 14:45:38');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sms_setting`
---
-
-CREATE TABLE `sms_setting` (
-  `id` int(11) NOT NULL,
-  `provider` varchar(20) NOT NULL DEFAULT 'nexmo',
-  `api_key` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `from` varchar(50) DEFAULT NULL,
-  `sms_template` text DEFAULT NULL,
-  `recall_sms_template` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sms_setting`
---
-
-INSERT INTO `sms_setting` (`id`, `provider`, `api_key`, `username`, `password`, `from`, `sms_template`, `recall_sms_template`) VALUES
-(1, 'clickatell', '-K1xA==', 'codekernel', '05kOeOvm', '11222747358', 'Token No: [TOKEN] \\r\\n Department: [DEPARTMENT], Counter: [COUNTER] and Officer: [OFFICER]. \\r\\n Your waiting no is [WAIT]. \\r\\n [DATE].', 'Please contact urgently. Token No: [TOKEN] \\r\\n Department: [DEPARTMENT], Counter: [COUNTER] and Officer: [OFFICER]. \\r\\n [DATE].');
+(1, 'Queuing System for Polytechnic College of La Union', 'Queue', 'public/assets/img/icons/logo.jpg', 'public/assets/img/icons/favicon.jpg', 'lyka@gmail.com', '+325 252 222', 'Demo street, NY-10000', 'copyright@2024', NULL, NULL, 'Asia/Hong_Kong');
 
 -- --------------------------------------------------------
 
@@ -303,8 +180,8 @@ CREATE TABLE `token` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `is_vip` tinyint(1) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-pending, 1-complete, 2-stop',
-  `sms_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-pending, 1-sent, 2-quick-send'
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-pending, 1-complete, 2-stop',
+  `sms_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-pending, 1-sent, 2-quick-send'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -312,36 +189,52 @@ CREATE TABLE `token` (
 --
 
 INSERT INTO `token` (`id`, `token_no`, `client_mobile`, `department_id`, `counter_id`, `user_id`, `note`, `created_by`, `created_at`, `updated_at`, `is_vip`, `status`, `sms_status`) VALUES
-(1, 'A101', '0123456789', 1, 1, 2, NULL, 2, '2021-09-19 10:30:11', '2021-09-26 10:30:11', NULL, 1, 1),
-(2, 'A201', '0123456789', 1, 2, 2, NULL, 2, '2021-09-19 10:30:11', '2021-09-26 10:30:11', NULL, 1, 1),
-(3, 'A202', '0123456789', 1, 2, 4, NULL, NULL, '2021-09-19 10:30:11', '2021-09-26 10:30:11', NULL, 1, 1),
-(4, 'A301', '0123456789', 1, 3, 4, NULL, 2, '2021-09-20 10:30:11', '2021-09-26 10:30:11', NULL, 1, 1),
-(5, 'VA302', '0123456789', 1, 3, 4, NULL, 2, '2021-09-21 10:30:11', NULL, 1, 0, 0),
-(6, 'VC501', '0123456789', 3, 5, 1, NULL, NULL, '2021-09-21 10:30:11', NULL, 1, 0, 0),
-(7, 'VC502', '0123456789', 3, 5, 1, NULL, NULL, '2021-09-22 10:30:11', NULL, 1, 0, 0),
-(8, 'B401', '0123456789', 2, 4, 5, NULL, 2, '2021-09-22 10:30:11', NULL, NULL, 0, 0),
-(9, 'O601', '0123456789', 4, 6, 4, NULL, 1, '2021-09-22 10:30:11', NULL, NULL, 0, 0),
-(10, 'O602', '0123456789', 4, 6, 5, NULL, 1, '2021-09-22 10:30:11', '2021-09-26 10:30:11', NULL, 1, 0),
-(11, 'A101', '0123456789', 1, 1, 2, NULL, 1, '2021-09-22 10:30:11', NULL, NULL, 0, 0),
-(12, 'A201', '0123456789', 1, 2, 2, NULL, 1, '2021-09-22 10:30:11', NULL, NULL, 0, 0),
-(13, 'VA202', '0123456789', 1, 2, 1, NULL, 1, '2021-09-23 10:30:11', '2021-09-26 10:30:11', 1, 1, 0),
-(14, 'A301', '0123456789', 1, 3, 4, NULL, 1, '2021-09-23 10:30:11', NULL, NULL, 0, 0),
-(15, 'A302', '0123456789', 1, 3, 4, NULL, NULL, '2021-09-24 10:30:11', NULL, NULL, 0, 0),
-(16, 'C501', '0123456789', 3, 5, 1, NULL, NULL, '2021-09-24 10:30:11', '2021-09-26 10:30:11', NULL, 1, 0),
-(17, 'C502', '0123456789', 3, 5, 1, NULL, 3, '2021-09-24 10:30:11', NULL, NULL, 0, 0),
-(18, 'B401', '0123456789', 2, 4, 5, NULL, 4, '2021-09-24 10:30:11', NULL, NULL, 0, 0),
-(19, 'O601', '0123456789', 4, 6, 8, NULL, 5, '2021-09-24 10:30:11', '2021-09-26 10:30:11', NULL, 1, 0),
-(20, 'O602', '0123456789', 4, 6, 2, NULL, NULL, '2021-09-25 10:30:11', NULL, NULL, 0, 0),
-(22, 'A101', '0123456789', 1, 1, 2, NULL, 3, '2021-09-26 10:30:11', NULL, NULL, 2, 0),
-(23, 'VA201', '0123456789', 1, 2, 4, NULL, 2, '2021-09-26 10:30:11', NULL, 1, 1, 0),
-(24, 'A202', '0123456789', 1, 2, 2, NULL, 1, '2021-09-26 10:30:11', NULL, NULL, 0, 0),
-(25, 'A301', '0123456789', 1, 3, 4, NULL, 2, '2021-09-26 10:30:11', NULL, NULL, 1, 0),
-(26, 'A302', '0123456789', 1, 3, 4, NULL, 4, '2021-09-26 10:30:11', NULL, NULL, 0, 0),
-(27, 'VC501', '0123456789', 3, 5, 1, NULL, 5, '2021-09-26 10:30:11', NULL, 1, 1, 0),
-(28, 'C502', '0123456789', 3, 5, 1, NULL, 3, '2021-09-26 10:30:11', NULL, NULL, 2, 0),
-(29, 'B401', '0123456789', 2, 4, 5, NULL, 6, '2021-09-26 10:30:11', NULL, NULL, 0, 0),
-(30, 'O601', '0123456789', 4, 6, 6, NULL, 7, '2021-09-26 10:30:11', NULL, NULL, 2, 0),
-(31, 'O602', '0123456789', 4, 6, 7, NULL, 8, '2021-09-26 10:30:11', NULL, NULL, 2, 0);
+(298, '33000', NULL, 15, 24, 33, NULL, 1, '2024-05-24 08:37:07', '2024-06-08 19:12:37', NULL, 1, 1),
+(299, '22000', NULL, 14, 23, 32, NULL, 1, '2024-05-24 08:37:12', '2024-06-08 19:12:40', NULL, 1, 1),
+(300, '11001', NULL, 13, 22, 31, NULL, 1, '2024-05-24 08:37:16', '2024-06-08 19:12:43', NULL, 1, 1),
+(301, '33001', NULL, 13, 22, 31, NULL, 1, '2024-05-24 08:46:14', '2024-06-08 19:12:45', NULL, 1, 1),
+(302, '33002', NULL, 14, 23, 32, NULL, 1, '2024-05-24 08:58:43', '2024-06-08 19:12:48', NULL, 1, 1),
+(303, '22001', NULL, 14, 23, 32, NULL, 1, '2024-05-24 08:58:47', '2024-06-08 19:12:59', NULL, 1, 1),
+(304, '33001', NULL, 15, 24, 33, NULL, 1, '2024-05-24 08:58:51', '2024-06-08 19:13:02', NULL, 1, 1),
+(305, '44000', NULL, 16, 25, 34, NULL, 1, '2024-05-24 08:58:55', '2024-06-08 19:13:04', NULL, 1, 1),
+(306, '55000', NULL, 13, 22, 31, NULL, 1, '2024-05-24 08:59:01', '2024-06-08 19:13:07', NULL, 1, 1),
+(307, '11000', NULL, 13, 22, 31, NULL, 1, '2024-06-03 06:37:09', '2024-06-08 19:13:09', NULL, 1, 1),
+(308, '22000', NULL, 14, 23, 32, NULL, 1, '2024-06-03 06:37:16', '2024-06-08 19:13:12', NULL, 1, 1),
+(309, '33000', NULL, 15, 24, 33, NULL, 1, '2024-06-03 06:37:22', '2024-06-03 06:38:33', NULL, 1, 1),
+(310, '44000', NULL, 16, 25, 34, NULL, 1, '2024-06-03 06:37:28', '2024-06-03 06:38:28', NULL, 1, 1),
+(311, '55000', NULL, 17, 26, 35, NULL, 1, '2024-06-03 06:37:33', '2024-06-03 06:38:16', NULL, 1, 1),
+(312, '11001', NULL, 13, 22, 31, NULL, 1, '2024-06-03 06:37:38', '2024-06-03 06:38:11', NULL, 1, 1),
+(313, '11000', NULL, 13, 22, 31, NULL, 1, '2024-06-06 07:59:39', '2024-06-08 19:13:14', NULL, 1, 1),
+(314, '11000', NULL, 13, 22, 31, NULL, 28, '2024-06-07 02:07:13', '2024-06-08 19:13:16', NULL, 1, 1),
+(315, '44000', NULL, 16, 25, 34, NULL, 28, '2024-06-07 02:07:42', '2024-06-08 19:13:18', NULL, 1, 1),
+(316, '55000', NULL, 17, 26, 35, NULL, 28, '2024-06-07 02:14:55', '2024-06-08 19:13:20', NULL, 1, 1),
+(317, '11001', NULL, 13, 22, 31, NULL, 28, '2024-06-07 10:34:58', '2024-06-08 19:13:22', NULL, 1, 1),
+(318, '11002', NULL, 13, 22, 31, NULL, 28, '2024-06-07 10:35:55', '2024-06-08 19:13:25', NULL, 1, 1),
+(319, '33000', NULL, 15, 24, 33, NULL, 28, '2024-06-07 10:45:34', '2024-06-08 19:13:29', NULL, 1, 1),
+(320, '11000', NULL, 13, 22, 31, NULL, 28, '2024-06-08 19:11:11', '2024-06-08 19:13:31', NULL, 1, 1),
+(321, '11001', NULL, 13, 22, 31, NULL, 28, '2024-06-08 19:11:18', '2024-06-08 19:13:33', NULL, 1, 1),
+(322, '11002', NULL, 13, 22, 31, NULL, 28, '2024-06-08 19:13:43', NULL, NULL, 0, 0),
+(323, '11003', NULL, 13, 22, 31, NULL, 28, '2024-06-08 19:13:49', NULL, NULL, 0, 0),
+(324, '11004', NULL, 13, 22, 31, NULL, 28, '2024-06-08 19:13:58', NULL, NULL, 0, 0),
+(325, '22000', NULL, 14, 23, 32, NULL, 28, '2024-06-08 19:14:18', NULL, NULL, 0, 0),
+(326, '22001', NULL, 14, 23, 32, NULL, 28, '2024-06-08 19:14:23', NULL, NULL, 0, 0),
+(327, '33000', NULL, 15, 24, 33, NULL, 28, '2024-06-08 19:14:27', NULL, NULL, 0, 0),
+(328, '33001', NULL, 15, 24, 33, NULL, 28, '2024-06-08 19:14:32', NULL, NULL, 0, 0),
+(329, '44000', NULL, 16, 25, 34, NULL, 28, '2024-06-08 19:14:36', NULL, NULL, 0, 0),
+(330, '44001', NULL, 16, 25, 34, NULL, 28, '2024-06-08 19:14:40', NULL, NULL, 0, 0),
+(331, '55000', NULL, 17, 26, 35, NULL, 28, '2024-06-08 19:14:44', NULL, NULL, 0, 0),
+(332, '55001', NULL, 17, 26, 35, NULL, 28, '2024-06-08 19:14:48', NULL, NULL, 0, 0),
+(333, '22002', NULL, 14, 23, 32, NULL, 28, '2024-06-08 19:15:03', NULL, NULL, 0, 0),
+(334, '33002', NULL, 15, 24, 33, NULL, 28, '2024-06-08 19:15:07', NULL, NULL, 0, 0),
+(335, '44002', NULL, 16, 25, 34, NULL, 28, '2024-06-08 19:15:12', NULL, NULL, 0, 0),
+(336, '55002', NULL, 17, 26, 35, NULL, 28, '2024-06-08 19:15:15', NULL, NULL, 0, 0),
+(337, '11005', NULL, 13, 22, 31, NULL, 28, '2024-06-08 19:17:23', NULL, NULL, 0, 0),
+(338, '11006', NULL, 13, 22, 31, NULL, 1, '2024-06-08 19:26:23', NULL, NULL, 0, 0),
+(339, '11000', NULL, 13, 22, 31, NULL, 1, '2024-06-26 18:43:42', NULL, NULL, 0, 0),
+(340, '11001', NULL, 13, 22, 31, NULL, 1, '2024-06-26 18:46:36', NULL, NULL, 0, 0),
+(341, '11002', NULL, 13, 22, 31, NULL, 1, '2024-06-26 18:47:33', NULL, NULL, 0, 0),
+(342, '44000', NULL, 16, 25, 34, NULL, 1, '2024-06-26 18:47:41', NULL, NULL, 0, 0),
+(343, '11003', NULL, 13, 22, 31, NULL, 1, '2024-06-26 18:48:16', NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -356,7 +249,7 @@ CREATE TABLE `token_setting` (
   `user_id` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -364,14 +257,11 @@ CREATE TABLE `token_setting` (
 --
 
 INSERT INTO `token_setting` (`id`, `department_id`, `counter_id`, `user_id`, `created_at`, `updated_at`, `status`) VALUES
-(7, 1, 1, 2, '2020-05-14 23:43:49', NULL, 1),
-(8, 1, 2, 4, '2020-05-14 23:50:42', NULL, 1),
-(9, 1, 3, 5, '2020-05-14 23:50:55', NULL, 1),
-(10, 4, 5, 6, '2020-05-15 00:19:46', NULL, 1),
-(11, 5, 4, 7, '2020-05-15 14:54:00', NULL, 1),
-(12, 6, 6, 9, '2020-05-15 14:54:15', NULL, 1),
-(13, 6, 7, 8, '2020-05-15 14:54:35', NULL, 1),
-(14, 7, 8, 10, '2020-05-15 14:56:49', NULL, 1);
+(25, 13, 22, 31, '2024-05-24 07:59:56', NULL, 1),
+(26, 14, 23, 32, '2024-05-24 08:01:31', NULL, 1),
+(27, 15, 24, 33, '2024-05-24 08:36:14', NULL, 1),
+(28, 16, 25, 34, '2024-05-24 08:58:03', NULL, 1),
+(29, 17, 26, 35, '2024-05-24 08:58:23', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -388,11 +278,11 @@ CREATE TABLE `user` (
   `department_id` int(11) DEFAULT NULL,
   `mobile` varchar(20) DEFAULT NULL,
   `photo` varchar(50) DEFAULT NULL,
-  `user_type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=officer, 2=staff, 3=client, 5=admin',
+  `user_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=officer, 2=staff, 3=client, 5=admin',
   `remember_token` varchar(255) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp(),
-  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=active,2=inactive'
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=active,2=inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -400,31 +290,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `department_id`, `mobile`, `photo`, `user_type`, `remember_token`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'iwant', 'sourcecodes', 'admin@iwantsourcecodes.com', '$2y$10$OZLqjk7mNy6GXwClur.vsO6UQdBZgCkprhupW39tan53ZL4l.qO9C', 0, '0123456789', NULL, 5, 'ynIq6Yy1BzKUpRbLQtn2KPQIWGQMBMMIvnw32fDgyyaZRvNepMdm5ySMlhMK', '2016-10-30 00:00:00', '2021-09-26 10:38:09', 1),
-(2, 'Wane', 'Willian', 'officer@codekernel.net', '$2y$10$U.JTKdWTWSRAw.H6Z.ZS3uJZrWaq3PssflkEe0xNW3ddNu5XS.rZe', 1, '174222584', NULL, 1, 'SLj4LiZ4RUZCXdOIlJ0bt05XbVz5CQx8B5dh67jUF8JUyyuSSRheAkxYXpvm', '2016-10-30 00:00:00', '2020-07-18 01:11:14', 1),
-(3, 'Xada', 'Roe', 'receptionist@codekernel.net', '$2y$10$FcsPFyCggD1kfn91WSDhSeqHc7n7j9X/u/Zbyn8kEx6qGjMn7mup2', 2, '0123456789', NULL, 2, 'pYM7rlWoDzUmUuRRPv6NFz33dePk5eLkYUL8thjYCQI5yVZBPkzpq7oB5ZF0', '2016-10-30 00:00:00', '2020-07-16 15:37:17', 1),
-(4, 'Jane', 'Doe', 'jane@doe.com', '$2y$10$Rpanf/X2B272cwTgjmKRMeqTlyham0iRu6WmFIAR4b6gaI2Mvh54m', 3, '0123456789', NULL, 1, NULL, '2018-07-29 00:00:00', NULL, 1),
-(5, 'Annie', 'Smith', 'annie@example.com', '$2y$10$Rpanf/X2B272cwTgjmKRMeqTlyham0iRu6WmFIAR4b6gaI2Mvh54m', 3, '0123456789', NULL, 1, NULL, '2018-07-29 00:00:00', NULL, 1),
-(6, 'Alex', 'Smith', 'alex@codekernel.net', '$2y$10$5DwvyIRa5P4CYhAhTQkjeu3BmX.J5sbokQQUuHh/O4pNUv02QvOKq', 4, '01821742285', NULL, 1, NULL, '2020-05-15 00:00:00', '2020-07-18 01:11:23', 1),
-(7, 'Bob', 'Banny', 'bob@codekernel.net', '$2y$10$Zfby6SvTitbJ0bO9CZI3GubPiMtM6T/Xv1VIsDJoyzgg.edxSyE8.', 5, '0123456789', NULL, 1, NULL, '2020-05-15 00:00:00', NULL, 1),
-(8, 'Danniyel', 'Dan', 'dan@codekernel.net', '$2y$10$l09QqbcYQ3BXiiScfHlMHuhXJKbLm8GyZObj7SWJ6a3fSK7jwvp0O', 6, '0123456789', NULL, 1, NULL, '2020-05-15 00:00:00', NULL, 1),
-(9, 'Jennifer', 'Doe', 'jennifer@codekernel.net', '$2y$10$ztTEJRFdS42R9JueIEAgnumeH1Da99iWHGA5ove6zGjOxfDsTEEOe', 6, '0123456789', NULL, 1, NULL, '2020-05-15 00:00:00', NULL, 1),
-(10, 'Tylor', 'Ronnie', 'tylor@codekernel.net', '$2y$10$8f6GXVBrCDILL6SZcQs2aOuOrnCHweU1aPQ61Tz27tvqqv9htFOo.', 7, '0123456789', NULL, 1, NULL, '2020-05-15 00:00:00', NULL, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_social_accounts`
---
-
-CREATE TABLE `user_social_accounts` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `provider_name` varchar(32) DEFAULT NULL,
-  `provider_id` varchar(64) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 'lyka', 'cagiuoa', 'lyka', '$2y$10$sBMhKR6EKE277OcGejcYHecGxygLbFe5KG.UBuAVRUHb1NSNIUQxi', 0, '0123456789', NULL, 5, 'JdpM0clN0EqFPh8vc5EGvcW4ieISwfH3mOzSodYaO6b3addEfZAApuaSzMki', '2016-10-30 00:00:00', '2024-06-23 18:14:47', 1),
+(28, 'lyka2', 'lyka2', 'lyka2', '$2y$10$kB2r7a6Gh4euo.v7zkAM0usi2J91Y6Bb/hBj7/EDPTp0K9GODP7PS', NULL, '2165468978798', NULL, 2, 'nIKQaNjQLJB9HaNA3CYUGoF0uyoKhjJfkkz0dTa5j67H435hhCjXFzX1c5D2', '2024-05-22 00:00:00', '2024-06-08 18:51:31', 1),
+(31, 'yas', 'yas', 'yas', '$2y$10$gO0QjPrCcLsX6XjNhScRB.KSjO2AZALCZH0j291j87lVF.vJ88nvy', 13, '54654687987987', NULL, 1, 'hqeEcBWQNSxkh1PrrG5o7KN53sDIKn5QB8vO76NWk8x7Qzf5HeJgf16giGyZ', '2024-05-24 00:00:00', '2024-06-08 18:51:13', 1),
+(32, 'lyy', 'lyy', 'lyy', '$2y$10$3PcER46KsYnhLp4ua8heuuLjCgrBqjoafVFwQl4wwagGChwyLhs4a', 14, '894849645132', NULL, 1, NULL, '2024-05-24 00:00:00', NULL, 1),
+(33, 'daryl', 'daryl', 'daryl', '$2y$10$VgTuAKUYhePVwMqqLuIlTeGd4XrJuzw69OrddgSrpQUB5FlSj.qHu', 15, '654897984132168', NULL, 1, NULL, '2024-05-24 00:00:00', NULL, 1),
+(34, 'tin', 'tin', 'tin', '$2y$10$saTb5GII.GMgoMUOn7FND.FVGFfuHiTNvQvkTaPqvaTQxsqyyXu.m', 16, '545', NULL, 1, NULL, '2024-05-24 00:00:00', '2024-05-24 00:00:00', 1),
+(35, 'gab', 'gab', 'gab', '$2y$10$FqGeeGerfgd8nUPUJjQywOP2WYmmAI/VFGr4O3412S/tMYFtLVX.G', 17, '5614251231', NULL, 1, NULL, '2024-05-24 00:00:00', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -455,27 +327,9 @@ ALTER TABLE `display_custom`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `message`
---
-ALTER TABLE `message`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `setting`
 --
 ALTER TABLE `setting`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sms_history`
---
-ALTER TABLE `sms_history`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sms_setting`
---
-ALTER TABLE `sms_setting`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -497,12 +351,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_social_accounts`
---
-ALTER TABLE `user_social_accounts`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -510,13 +358,13 @@ ALTER TABLE `user_social_accounts`
 -- AUTO_INCREMENT for table `counter`
 --
 ALTER TABLE `counter`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `display`
@@ -531,52 +379,28 @@ ALTER TABLE `display_custom`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `message`
---
-ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
 -- AUTO_INCREMENT for table `setting`
 --
 ALTER TABLE `setting`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `sms_history`
---
-ALTER TABLE `sms_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
--- AUTO_INCREMENT for table `sms_setting`
---
-ALTER TABLE `sms_setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `token`
 --
 ALTER TABLE `token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
 
 --
 -- AUTO_INCREMENT for table `token_setting`
 --
 ALTER TABLE `token_setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT for table `user_social_accounts`
---
-ALTER TABLE `user_social_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
